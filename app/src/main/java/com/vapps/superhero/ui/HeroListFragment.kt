@@ -6,16 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.vapps.superhero.R
 import com.vapps.superhero.databinding.FragmentHeroListBinding
+import com.vapps.superhero.ui.adapter.HeroListAdapter
 import com.vapps.superhero.viewmodel.HeroViewModel
 
 /* Home Fragment that shows a gridview of all marvel heroes
 * */
 class HeroListFragment : Fragment() {
 
-    private val sharedViewModel: HeroViewModel by activityViewModels()
+    private val sharedViewModel: HeroViewModel by viewModels()
     private var _binding: FragmentHeroListBinding? = null
     val binding: FragmentHeroListBinding get() = _binding!!
 
@@ -25,21 +27,15 @@ class HeroListFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentHeroListBinding.inflate(inflater, container, false)
-        val view = binding.root
+
 
         binding.apply {
             viewModel = sharedViewModel
             lifecycleOwner = viewLifecycleOwner
-        }
-        binding.navigationTestButton.setOnClickListener {
-            findNavController().navigate(R.id.action_heroListFragment_to_heroDetailFragment)
+            heroList.adapter = HeroListAdapter()
         }
 
-        binding.apiTestButton.setOnClickListener {
-
-        }
-
-        return view
+        return binding.root
     }
 
     override fun onDestroyView() {

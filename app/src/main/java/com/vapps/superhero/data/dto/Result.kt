@@ -20,8 +20,7 @@ data class Result(
             id = id,
             name = name,
             description = description,
-            thumbnail = thumbnail.path,
-            thumbnailExt = thumbnail.extension,
+            imageLink = thumbnail.path+ "." +thumbnail.extension,
             comics = comics.items.map {
                 it.name
             }

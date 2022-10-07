@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="hero"
+            type="com.vapps.superhero.model.Hero" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
+
+        <ImageView
+            android:id="@+id/hero_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:src="@tools:sample/backgrounds/scenic"
+            app:imageUrl="@{hero.imageLink}"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Hero name"
+            android:text="@{hero.name}"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:gravity="center"
+            android:layout_gravity="center|bottom"
+            android:background="#A85A5A5A" />
+    </FrameLayout>
+
+
+
+</layout>

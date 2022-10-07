@@ -9,34 +9,20 @@
             type="com.vapps.superhero.viewmodel.HeroViewModel" />
     </data>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-        <Button
-            android:id="@+id/api_test_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:onClick="@{() -> viewModel.getHeroes()}"
-            android:text="Call API" />
-
-        <Button
-            android:id="@+id/navigation_test_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Go to detail" />
-
-        <TextView
-            android:id="@+id/api_test_result"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/hero_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@{viewModel.apiStatus}"
-            tools:text="Hier kommt der API Text hin" />
-
-    </LinearLayout>
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="3"
+            tools:itemCount="16"
+            tools:listitem="@layout/hero_item"
+            android:clipToPadding="false"
+            app:listData="@{viewModel.heroes}"
+            />
+    </FrameLayout>
 </layout>
