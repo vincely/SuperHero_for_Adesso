@@ -28,7 +28,6 @@ class HeroViewModel : ViewModel() {
         viewModelScope.launch {
                 _heroes.value = HeroApi.retrofitService.getAllHeroes().data.results.map {  it.toHero()}
 
-
         }
     }
 }

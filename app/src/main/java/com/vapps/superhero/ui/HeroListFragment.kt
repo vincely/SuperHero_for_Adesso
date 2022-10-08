@@ -27,7 +27,11 @@ class HeroListFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentHeroListBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
             viewModel = sharedViewModel
@@ -35,7 +39,6 @@ class HeroListFragment : Fragment() {
             heroList.adapter = HeroListAdapter()
         }
 
-        return binding.root
     }
 
     override fun onDestroyView() {

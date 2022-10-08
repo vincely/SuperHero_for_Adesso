@@ -17,7 +17,7 @@ data class Result(
 ){
     fun toHero(): Hero{
         return Hero(
-            id = id,
+            heroId = id,
             name = name,
             description = description,
             imageLink = thumbnail.getLink(),

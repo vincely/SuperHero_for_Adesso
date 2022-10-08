@@ -12,7 +12,7 @@ class HeroListAdapter : ListAdapter<Hero, HeroListAdapter.HeroListViewHolder>(Di
 
     companion object DiffCallback : DiffUtil.ItemCallback<Hero>() {
         override fun areItemsTheSame(oldItem: Hero, newItem: Hero): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.heroId == newItem.heroId
         }
 
         override fun areContentsTheSame(oldItem: Hero, newItem: Hero): Boolean {
