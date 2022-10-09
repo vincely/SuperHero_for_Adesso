@@ -15,6 +15,10 @@ import kotlinx.coroutines.runBlocking
 
 class HeroViewModel(private val dao: HeroDao) : ViewModel() {
 
+
+    private val _navigateToDetail = MutableLiveData<Int?>()
+    val navigateToDetail: LiveData<Int?> get() = _navigateToDetail
+
     private val _apiStatus = MutableLiveData<String>()
     val apiStatus: LiveData<String> get() = _apiStatus
 
@@ -52,5 +56,13 @@ class HeroViewModel(private val dao: HeroDao) : ViewModel() {
             }
         }
 
+    }
+
+    fun onHeroClicked(id: Int) {
+        _navigateToDetail.value = id
+    }
+
+    fun onDetailNavigated() {
+        _navigateToDetail.value = null
     }
 }

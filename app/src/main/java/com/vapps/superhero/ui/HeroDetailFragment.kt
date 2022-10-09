@@ -18,11 +18,15 @@ class HeroDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentHeroDetailBinding.inflate(inflater, container, false)
-        val view = binding.root
-        // Inflate the layout for this fragment
-        return view
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val heroId = HeroDetailFragmentArgs.fromBundle(requireArguments()).heroId
+        binding.detailTv.text = "clicked id is: $heroId"
     }
 
     override fun onDestroyView() {

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.vapps.superhero.R
@@ -43,8 +44,21 @@ class HeroListFragment : Fragment() {
         binding.apply {
             viewModel = heroViewModel
             lifecycleOwner = viewLifecycleOwner
-            heroList.adapter = HeroListAdapter()
         }
+
+        val heroListAdapter = HeroListAdapter{
+                heroId -> heroViewModel.onHeroClicked(heroId)
+        }
+        binding.heroList.adapter = heroListAdapter
+
+        heroViewModel.navigateToDetail.observe(viewLifecycleOwner, Observer {
+            heroId -> heroId?.let {
+                val action = HeroListFragmentDirections.actionHeroListFragmentToHeroDetailFragment(heroId)
+            this.findNavController().navigate(action)
+            heroViewModel.onDetailNavigated()
+        }
+        })
+
     }
 
     override fun onDestroyView() {

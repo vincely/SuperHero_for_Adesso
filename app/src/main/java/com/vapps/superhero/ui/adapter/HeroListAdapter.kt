@@ -9,7 +9,7 @@ import com.vapps.superhero.databinding.HeroItemBinding
 import com.vapps.superhero.model.Hero
 import com.vapps.superhero.model.HeroWithComics
 
-class HeroListAdapter : ListAdapter<HeroWithComics, HeroListAdapter.HeroListViewHolder>(DiffCallback) {
+class HeroListAdapter(val clickListener: (heroId: Int) -> Unit) : ListAdapter<HeroWithComics, HeroListAdapter.HeroListViewHolder>(DiffCallback) {
 
     companion object DiffCallback : DiffUtil.ItemCallback<HeroWithComics>() {
         override fun areItemsTheSame(oldItem: HeroWithComics, newItem: HeroWithComics): Boolean {
@@ -30,9 +30,12 @@ class HeroListAdapter : ListAdapter<HeroWithComics, HeroListAdapter.HeroListView
             }
         }
 
-        fun bind(hero: HeroWithComics) {
+        fun bind(hero: HeroWithComics, clickListener: (heroId: Int) -> Unit) {
             binding.heroEntity = hero.heroEntity
             binding.executePendingBindings()
+            binding.root.setOnClickListener {
+                clickListener(hero.heroEntity.heroId)
+            }
         }
     }
 
@@ -42,6 +45,6 @@ class HeroListAdapter : ListAdapter<HeroWithComics, HeroListAdapter.HeroListView
 
     override fun onBindViewHolder(holder: HeroListViewHolder, position: Int) {
         val hero = getItem(position)
-        holder.bind(hero)
+        holder.bind(hero, clickListener)
     }
 }

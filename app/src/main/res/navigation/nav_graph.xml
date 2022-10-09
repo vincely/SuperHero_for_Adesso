@@ -11,11 +11,19 @@
         android:label="HeroListFragment" >
         <action
             android:id="@+id/action_heroListFragment_to_heroDetailFragment"
-            app:destination="@id/heroDetailFragment" />
+            app:destination="@id/heroDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/heroDetailFragment"
         android:name="com.vapps.superhero.ui.HeroDetailFragment"
         android:label="fragment_hero_detail"
-        tools:layout="@layout/fragment_hero_detail" />
+        tools:layout="@layout/fragment_hero_detail" >
+        <argument
+            android:name="heroId"
+            app:argType="integer" />
+    </fragment>
 </navigation>
