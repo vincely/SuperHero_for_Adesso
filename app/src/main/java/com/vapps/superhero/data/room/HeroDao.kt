@@ -1,5 +1,6 @@
 package com.vapps.superhero.data.room
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -17,10 +18,13 @@ interface HeroDao {
     suspend fun insertComic(comicEntity: ComicEntity)
 
     @Transaction
-    @Query("SELECT * FROM heroentity")
-    suspend fun getHeroesWithComics(): List<HeroWithComics>
+    @Query("SELECT * FROM heroentity ORDER BY name ASC")
+    fun getHeroesWithComics(): LiveData<List<HeroWithComics>>
 
     @Transaction
     @Query("SELECT * FROM comicentity")
     suspend fun getComicsWithHeroes(): List<ComicWithHeroes>
+
+    @Query("SELECT (SELECT COUNT(*) FROM heroentity) == 0")
+    suspend fun isEmpty(): Boolean
 }

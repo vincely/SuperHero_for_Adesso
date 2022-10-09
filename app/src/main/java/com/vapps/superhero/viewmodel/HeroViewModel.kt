@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.vapps.superhero.data.room.HeroDao
 import com.vapps.superhero.model.Hero
 import com.vapps.superhero.model.HeroEntity
+import com.vapps.superhero.model.HeroWithComics
 import com.vapps.superhero.network.HeroApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -22,14 +23,19 @@ class HeroViewModel(private val dao: HeroDao) : ViewModel() {
     val _heroes = MutableLiveData<List<Hero>>()
     val heroes: LiveData<List<Hero>> get() = _heroes
 
+    var allHeroes = dao.getHeroesWithComics()
     init {
         getHeroes()
     }
 
+
+
     private fun getHeroes() {
         viewModelScope.launch {
-            _heroes.value = HeroApi.retrofitService.getAllHeroes().data.results.map {  it.toHero()}
-            fillDatabase()
+            if (dao.isEmpty()) {
+                _heroes.value = HeroApi.retrofitService.getAllHeroes().data.results.map {  it.toHero()}
+                fillDatabase()
+            }
         }
     }
 

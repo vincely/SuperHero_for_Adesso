@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="hero"
-            type="com.vapps.superhero.model.Hero" />
+            name="heroEntity"
+            type="com.vapps.superhero.model.HeroEntity" />
     </data>
 
     <FrameLayout
@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:src="@tools:sample/backgrounds/scenic"
-            app:imageUrl="@{hero.imageLink}"
+            app:imageUrl="@{heroEntity.imageLink}"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true" />
 
@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="Hero name"
-            android:text="@{hero.name}"
+            android:text="@{heroEntity.name}"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:paddingTop="4dp"

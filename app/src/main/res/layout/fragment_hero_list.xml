@@ -22,7 +22,7 @@
             tools:itemCount="16"
             tools:listitem="@layout/hero_item"
             android:clipToPadding="false"
-            app:listData="@{viewModel.heroes}"
+            app:listData="@{viewModel.allHeroes}"
             />
 
     </FrameLayout>

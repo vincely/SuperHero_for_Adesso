@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.vapps.superhero.R
 import com.vapps.superhero.model.Hero
+import com.vapps.superhero.model.HeroWithComics
 import com.vapps.superhero.ui.adapter.HeroListAdapter
 
 @BindingAdapter("imageUrl")
@@ -21,7 +22,7 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
 }
 
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<Hero>?) {
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<HeroWithComics>?) {
     val adapter = recyclerView.adapter as HeroListAdapter
     adapter.submitList(data)
 }
