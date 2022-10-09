@@ -24,5 +24,6 @@
             android:clipToPadding="false"
             app:listData="@{viewModel.heroes}"
             />
+
     </FrameLayout>
 </layout>

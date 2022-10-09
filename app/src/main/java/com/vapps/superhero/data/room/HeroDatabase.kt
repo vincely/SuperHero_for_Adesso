@@ -5,9 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.vapps.superhero.model.Hero
-import com.vapps.superhero.model.HeroComic
+import com.vapps.superhero.model.ComicEntity
+import com.vapps.superhero.model.HeroComicCrossRef
+import com.vapps.superhero.model.HeroEntity
 
-@Database(entities = [Hero::class, HeroComic::class], version = 1, exportSchema = false)
+@Database(entities = [HeroEntity::class, ComicEntity::class, HeroComicCrossRef::class], version = 1, exportSchema = false)
 abstract class HeroDatabase : RoomDatabase() {
     abstract val heroDao: HeroDao
 

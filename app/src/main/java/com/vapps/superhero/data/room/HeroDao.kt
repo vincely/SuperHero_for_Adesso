@@ -5,25 +5,22 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
-import com.vapps.superhero.model.ComicWithHeroes
-import com.vapps.superhero.model.Hero
-import com.vapps.superhero.model.HeroComic
-import com.vapps.superhero.model.HeroWithComics
+import com.vapps.superhero.model.*
 
 @Dao
 interface HeroDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertHero(hero: Hero)
+    suspend fun insertHero(heroEntity: HeroEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertComic(heroComic: HeroComic)
+    suspend fun insertComic(comicEntity: ComicEntity)
 
     @Transaction
-    @Query("SELECT * FROM hero")
+    @Query("SELECT * FROM heroentity")
     suspend fun getHeroesWithComics(): List<HeroWithComics>
 
     @Transaction
-    @Query("SELECT * FROM hero")
+    @Query("SELECT * FROM comicentity")
     suspend fun getComicsWithHeroes(): List<ComicWithHeroes>
 }
