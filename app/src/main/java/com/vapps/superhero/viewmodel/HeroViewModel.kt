@@ -1,6 +1,5 @@
 package com.vapps.superhero.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,10 +10,12 @@ import com.vapps.superhero.model.HeroEntity
 import com.vapps.superhero.model.HeroWithComics
 import com.vapps.superhero.network.HeroApi
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class HeroViewModel(private val dao: HeroDao) : ViewModel() {
 
+
+    var _currentHero = MutableLiveData<HeroEntity>()
+    val currentHero: LiveData<HeroEntity> get() = _currentHero
 
     private val _navigateToDetail = MutableLiveData<Int?>()
     val navigateToDetail: LiveData<Int?> get() = _navigateToDetail
@@ -28,6 +29,7 @@ class HeroViewModel(private val dao: HeroDao) : ViewModel() {
     val heroes: LiveData<List<Hero>> get() = _heroes
 
     var allHeroes = dao.getHeroesWithComics()
+
     init {
         getHeroes()
     }
@@ -55,7 +57,18 @@ class HeroViewModel(private val dao: HeroDao) : ViewModel() {
                 }
             }
         }
+    }
 
+    fun setCurrentHero(id: Int){
+        var heroList: List<HeroWithComics> = listOf()
+        allHeroes.value?.let {
+            heroList = it
+        }
+        for (hero in heroList) {
+            if (hero.heroEntity.heroId == id) {
+                _currentHero.value = hero.heroEntity
+            }
+        }
     }
 
     fun onHeroClicked(id: Int) {

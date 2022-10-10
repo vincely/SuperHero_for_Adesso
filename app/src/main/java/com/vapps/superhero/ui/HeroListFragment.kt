@@ -5,12 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.vapps.superhero.R
 import com.vapps.superhero.data.room.HeroDatabase
 import com.vapps.superhero.databinding.FragmentHeroListBinding
 import com.vapps.superhero.ui.adapter.HeroListAdapter
@@ -39,7 +36,7 @@ class HeroListFragment : Fragment() {
         val application = requireNotNull(this.activity).application
         val dao = HeroDatabase.getInstance(application).heroDao
         val factory = HeroViewModelFactory(dao)
-        heroViewModel = ViewModelProvider(this, factory).get(HeroViewModel::class.java)
+        heroViewModel = ViewModelProvider(requireActivity(), factory).get(HeroViewModel::class.java)
 
         binding.apply {
             viewModel = heroViewModel
@@ -53,8 +50,10 @@ class HeroListFragment : Fragment() {
 
         heroViewModel.navigateToDetail.observe(viewLifecycleOwner, Observer {
             heroId -> heroId?.let {
+                heroViewModel.setCurrentHero(it)
                 val action = HeroListFragmentDirections.actionHeroListFragmentToHeroDetailFragment(heroId)
-            this.findNavController().navigate(action)
+                this.findNavController().navigate(action)
+
             heroViewModel.onDetailNavigated()
         }
         })

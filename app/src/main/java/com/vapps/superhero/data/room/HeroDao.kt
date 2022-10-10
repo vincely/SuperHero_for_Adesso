@@ -25,6 +25,9 @@ interface HeroDao {
     @Query("SELECT * FROM comicentity")
     suspend fun getComicsWithHeroes(): List<ComicWithHeroes>
 
+    @Query("SELECT * FROM heroentity WHERE heroId = :id")
+    suspend fun getHero(id: Int): List<HeroEntity>
+
     @Query("SELECT (SELECT COUNT(*) FROM heroentity) == 0")
     suspend fun isEmpty(): Boolean
 }
