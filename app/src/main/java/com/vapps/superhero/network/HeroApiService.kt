@@ -16,7 +16,7 @@ private const val BASE_URL = "https://gateway.marvel.com"
 private val TIMESTAMP = Timestamp(System.currentTimeMillis()).time.toString()
 private const val PUBLIC_KEY = "4d100d8f32faab4dbf7ccee7e0c08063"
 private const val PRIVATE_KEY = "23dd8794ca7aaa71dd4ae7a9420b38ca2d75454e"
-private const val LIMIT = "100"
+const val LIMIT = "100"
 private const val OFFSET = "500"
 
 fun hash(): String {
@@ -42,7 +42,7 @@ interface HeroApiService {
         @Query("ts")ts: String = TIMESTAMP,
         @Query("hash")hash: String = hash(),
         @Query("limit")limit: String = LIMIT,
-        @Query("offset")offset: String = OFFSET,
+        @Query("offset")offset: String,
     ): HeroesDTO
 }
 

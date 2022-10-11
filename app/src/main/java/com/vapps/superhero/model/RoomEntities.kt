@@ -16,6 +16,5 @@ data class HeroEntity(
 @Entity
 data class ComicEntity (
     @PrimaryKey
-    var comicName: String,
-    var heroId: Int
+    var comicName: String
 )

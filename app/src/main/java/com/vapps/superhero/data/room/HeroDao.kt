@@ -21,9 +21,12 @@ interface HeroDao {
     @Query("SELECT * FROM heroentity ORDER BY name ASC")
     fun getHeroesWithComics(): LiveData<List<HeroWithComics>>
 
+/*    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertHeroComic(join: HeroComicCrossRef)*/
+
     @Transaction
     @Query("SELECT * FROM comicentity")
-    suspend fun getComicsWithHeroes(): List<ComicWithHeroes>
+    fun getComicsWithHeroes(): LiveData<List<ComicWithHeroes>>
 
     @Query("SELECT * FROM heroentity WHERE heroId = :id")
     suspend fun getHero(id: Int): List<HeroEntity>
