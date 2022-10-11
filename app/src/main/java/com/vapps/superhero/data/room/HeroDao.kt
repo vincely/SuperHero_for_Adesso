@@ -21,16 +21,15 @@ interface HeroDao {
     @Query("SELECT * FROM heroentity ORDER BY name ASC")
     fun getHeroesWithComics(): LiveData<List<HeroWithComics>>
 
-/*    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertHeroComic(join: HeroComicCrossRef)*/
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertHeroComicCrossRef(crossRef: HeroComicCrossRef)
 
     @Transaction
     @Query("SELECT * FROM comicentity")
     fun getComicsWithHeroes(): LiveData<List<ComicWithHeroes>>
 
-    @Query("SELECT * FROM heroentity WHERE heroId = :id")
-    suspend fun getHero(id: Int): List<HeroEntity>
 
+    //check if db is empty
     @Query("SELECT (SELECT COUNT(*) FROM heroentity) == 0")
     suspend fun isEmpty(): Boolean
 }

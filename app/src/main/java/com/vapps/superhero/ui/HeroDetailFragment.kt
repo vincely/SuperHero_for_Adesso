@@ -50,20 +50,12 @@ class HeroDetailFragment : Fragment() {
         viewModel.currentHero.value?.apply {
             toolbar.title = name
             binding.heroEntity = this
-            if (description.isEmpty()) {
-                binding.detailTv.text = "No description"
-            } else {
-                binding.detailTv.text = description
-            }
         }
+
         viewModel.currentHeroComics.value?.let {
             val adapter = ComicListAdapter(it)
             binding.comicList.adapter = adapter
         }
-    binding.testButton.setOnClickListener {
-        Toast.makeText(context, viewModel.currentHero.value?.imageLink, Toast.LENGTH_SHORT).show()
-    }
-
     }
 
     override fun onDestroyView() {

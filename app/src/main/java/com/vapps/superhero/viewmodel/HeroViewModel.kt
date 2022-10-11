@@ -67,6 +67,7 @@ class HeroViewModel(private val dao: HeroDao) : ViewModel() {
                         dao.insertHero(HeroEntity(heroId,name,description,imageLink))
                         for (comicName in comics) {
                             dao.insertComic(ComicEntity(comicName))
+                            dao.insertHeroComicCrossRef(HeroComicCrossRef(heroId, comicName))
                         }
                     }
                 }
