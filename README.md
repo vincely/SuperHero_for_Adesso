@@ -6,3 +6,12 @@ This app is using Retrofit and Moshi to handle the API.
 
 I do not own any Marvel content shown within the app. 
 Data provided by Marvel. © 2022 MARVEL
+
+## Update 11. October 2022
+
+I've implemented the main functionality of the App. There are still some things I was not able to finish due to time.
+
+### Known Issues
+
+The app won't work on first start if there is no internet connection.
+Landscape mode is not tested at all. It should work with visibility impediments.
