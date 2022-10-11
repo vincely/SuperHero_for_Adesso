@@ -3,4 +3,5 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="comics">Comics</string>
+    <string name="send_hero_text">Hey friend,\ncheck out this Marvel Character:\n\nIts name is %1$s and there are %2$s comics with this character.</string>
 </resources>

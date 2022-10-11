@@ -1,5 +1,7 @@
 package com.vapps.superhero.ui
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.vapps.superhero.R
 import com.vapps.superhero.data.room.HeroDatabase
 import com.vapps.superhero.databinding.FragmentHeroDetailBinding
 import com.vapps.superhero.ui.adapter.ComicListAdapter
@@ -55,6 +58,20 @@ class HeroDetailFragment : Fragment() {
         viewModel.currentHeroComics.value?.let {
             val adapter = ComicListAdapter(it)
             binding.comicList.adapter = adapter
+        }
+
+        binding.sendHero.setOnClickListener {
+            val message = resources.getString(R.string.send_hero_text, viewModel.currentHero.value?.name.toString(), viewModel.currentHeroComics.value?.size.toString())
+            val intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, message)
+                type = "text/plain"
+            }
+            try {
+                startActivity(intent)
+            } catch (e: ActivityNotFoundException) {
+                Toast.makeText(context, "No activity can handle this intent", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
